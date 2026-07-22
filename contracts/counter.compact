@@ -1,0 +1,20 @@
+// Counter contract in Compact language
+// Demonstrates public ledger state, private witness inputs, and deliberate disclosure.
+
+pragma language_version >= 0.17.0;
+
+import CompactStandardLibrary;
+
+// Public ledger state - visible to anyone on-chain
+export ledger counter: Uint<64>;
+
+// Circuit that takes a private secret increment value, proves it is non-zero,
+// and increments the public counter state on-chain by disclosing the amount.
+export circuit incrementCounter(privateSecret: Uint<64>): [] {
+    // Enforce private witness constraint: increment must be positive (> 0)
+    assert(privateSecret > 0, "Increment amount must be greater than zero");
+    
+    // Disclose the privateSecret value explicitly to modify public counter
+    const inc: Uint<64> = disclose(privateSecret);
+    counter = (counter + inc) as Uint<64>;
+}
