@@ -67,7 +67,7 @@ async function waitForProofServer(maxAttempts = 60, delayMs = 2000): Promise<boo
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const zkConfigPath = path.resolve(__dirname, '..', 'contracts', 'managed', 'hello-world');
-const contractPath = path.join(zkConfigPath, 'contract', 'index.js');
+const contractPath = path.join(zkConfigPath, 'contract', 'index.cjs');
 
 if (!fs.existsSync(contractPath)) {
   console.error('\n❌ Contract not compiled! Run: npm run compile\n');
