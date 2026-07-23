@@ -8,7 +8,7 @@
 |------------|---------|
 | Undeployed | `3523aa3006329b8e763ba2cc655fb9a0e25833d2f11072c1d50146a830074d0b` |
 | Preview    | Pending deployment |
-| Preprod    | Pending deployment |
+| Preprod    | `a746a03e40e6e4b36ec451548e355f2611657c2334e0e7594c3d14d4ef8da1de` |
 
 ## What This Does
 
@@ -55,4 +55,4 @@ The **Degree Verification Platform** is a privacy-first smart contract built on 
 
 ## Screenshots
 
-[Add compile output and contract deployment screenshots here]
+![Deployment Screenshot](./screenshot.png)
