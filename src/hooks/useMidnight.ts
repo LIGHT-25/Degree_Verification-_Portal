@@ -267,7 +267,11 @@ export function useMidnight() {
         log(setState, 'Calling incrementCounter circuit (proof generating in wallet)...');
         const transaction = await contract.callTx.incrementCounter(privateSecret);
         log(setState, 'Transaction submitted! TX: ' + transaction.public.txId);
-        log(setState, 'Full tx result: ' + JSON.stringify(transaction.public, null, 2));
+        log(setState, 'Full tx result: ' + JSON.stringify(
+          transaction.public,
+          (key, value) => (typeof value === 'bigint' ? value.toString() : value),
+          2
+        ));
 
         setCircuitState({
           isCalling: false,
