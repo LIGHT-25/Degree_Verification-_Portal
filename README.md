@@ -53,10 +53,11 @@ An on-chain observer can see that the counter was incremented and by how much (v
 The **Degree Verification Platform** is a privacy-first smart contract built on the Midnight network. It allows universities to securely issue academic credentials while empowering students to prove their degree qualifications to employers without exposing sensitive, underlying private data on a public ledger. By using Midnight's zero-knowledge proofs, the platform ensures that the verification is cryptographically secure and tamper-proof.
 
 ### Level 1 Screenshots
+##compilation screen shot:
+<img width="638" height="169" alt="Screenshot 2026-07-25 032956" src="https://github.com/user-attachments/assets/d479cd0e-df77-4ea7-9bf5-f40a33b87098" />
 
-![Deployment Screenshot](./screenshot.png)
-
-![UI Screenshot](./ui-screenshot.png)
+##Deployment screenshot
+<img width="1365" height="588" alt="Screenshot 2026-07-25 032653" src="https://github.com/user-attachments/assets/be1ed5ba-d26a-4d1b-9e2c-b624090c72ec" />
 
 ### Level 1 Tech Stack
 
