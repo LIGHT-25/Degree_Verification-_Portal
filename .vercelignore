@@ -4,5 +4,7 @@ dist/
 .midnight-wallet-state/
 midnight-level-db/
 .zkir/
-contracts/managed/
+contracts/managed/hello-world/
 *.lock
+*.mp4
+*.log

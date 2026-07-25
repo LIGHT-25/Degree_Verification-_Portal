@@ -15,8 +15,12 @@ build/
 .env.test.local
 .env.production.local
 
-# Contract artifacts
-contracts/managed/
+# Contract artifacts (keep counter bindings + keys for Vercel UI build)
+contracts/managed/hello-world/
+contracts/managed/compiler/
+contracts/managed/contract/
+contracts/managed/keys/
+contracts/managed/zkir/
 
 # Deployment info
 deployment.json
@@ -58,3 +62,5 @@ temp/
 
 # Midnight wallet sync state (per-network serialized wallet state cache)
 .midnight-wallet-state/
+
+.vercel

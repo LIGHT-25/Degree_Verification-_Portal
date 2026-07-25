@@ -8,8 +8,8 @@
   "scripts": {
     "compile": "node -e \"const fs=require('fs'); const path=require('path'); const compiled=path.join(process.cwd(),'contracts/managed/counter/contract/index.js'); if (!fs.existsSync(compiled)) { console.error('Compiled counter artifacts not found.'); process.exit(1); } console.log('Using existing compiled artifacts at contracts/managed/counter');\"",
     "build": "npx tsc --noEmit || true",
-    "build:ui": "cp -r contracts/managed/keys public/keys && cp -r contracts/managed/zkir public/zkir && vite build",
-    "dev": "cp -r contracts/managed/keys public/keys && cp -r contracts/managed/zkir public/zkir && vite",
+    "build:ui": "node scripts/sync-zk-artifacts.mjs && vite build",
+    "dev": "node scripts/sync-zk-artifacts.mjs && vite",
     "preview": "vite preview",
     "setup": "npx tsx src/setup.ts",
     "deploy": "npx tsx src/deploy.ts",
