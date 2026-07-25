@@ -54,9 +54,11 @@ The **Degree Verification Platform** is a privacy-first smart contract built on 
 
 ### Level 1 Screenshots
 ##compilation screen shot:
+
 <img width="638" height="169" alt="Screenshot 2026-07-25 032956" src="https://github.com/user-attachments/assets/d479cd0e-df77-4ea7-9bf5-f40a33b87098" />
 
-##Deployment screenshot
+##Deployment screenshot:
+
 <img width="1365" height="588" alt="Screenshot 2026-07-25 032653" src="https://github.com/user-attachments/assets/be1ed5ba-d26a-4d1b-9e2c-b624090c72ec" />
 
 ### Level 1 Tech Stack
