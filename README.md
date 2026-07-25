@@ -11,7 +11,7 @@ This project is built on the Midnight Network.
 | Public GitHub repository with README | ✅ This repo |
 | Live demo (Vercel) | ✅ [degree-verification-portal-one.vercel.app](https://degree-verification-portal-one.vercel.app) |
 | Preprod contract address (verifiable on-chain) | ✅ See below |
-| Demo video: Lace connect + successful circuit call | ✅ [circuit_calling_proof.mp4](./circuit_calling_proof.mp4) |
+| Demo video: Lace connect + successful circuit call | ✅ [circuit_calling_proof.mp4]([(https://youtu.be/G2w07YhLLnc)) |
 | README documents the privacy claim | ✅ See **Privacy Claim** |
 | Minimum 8 meaningful commits | ✅ |
 
@@ -32,7 +32,7 @@ This project is built on the Midnight Network.
 
 Wallet connect / disconnect and a successful `incrementCounter` circuit call on Preprod:
 
-**[Watch circuit_calling_proof.mp4](./circuit_calling_proof.mp4)**
+**[Watch circuit_calling_proof.mp4](https://youtu.be/G2w07YhLLnc)**
 
 ## Deployed Preprod Contract
 
