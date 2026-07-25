@@ -17,7 +17,7 @@ This project is built on the Midnight Network.
 
 ## Live Demo
 
-**https://degree-verification-portal-one.vercel.app**
+[**https://degree-verification-portal-one.vercel.app**](https://youtu.be/G2w07YhLLnc)
 
 ### Try it (Preprod + Lace)
 
