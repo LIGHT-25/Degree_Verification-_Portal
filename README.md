@@ -1,57 +1,58 @@
-# Degree Verification Platform
+# Degree Verification Portal
 
-> A Midnight compact contract that tracks a public counter while proving private increment values without exposing them on-chain.
+> A privacy-preserving dApp on Midnight Network that proves degree credentials without revealing private data on-chain.
+
+## Live Demo
+
+[PASTE LIVE URL AFTER DEPLOYING FRONTEND]
 
 ## Contract Address
 
-| Network    | Address |
-|------------|---------|
-| Undeployed | `3523aa3006329b8e763ba2cc655fb9a0e25833d2f11072c1d50146a830074d0b` |
-| Preprod    | `a746a03e40e6e4b36ec451548e355f2611657c2334e0e7594c3d14d4ef8da1de` |
+| Network  | Address |
+|----------|---------|
+| Preprod  | `a746a03e40e6e4b36ec451548e355f2611657c2334e0e7594c3d14d4ef8da1de` |
+
+(Contract address is MANDATORY. Do not leave this blank.)
 
 ## What This Does
 
-This contract keeps a public counter on the ledger and accepts a private witness input that must be strictly positive before the counter can be incremented. The circuit intentionally discloses the increment value only as part of the state transition, while the private witness remains part of the proof context rather than being exposed as public data.
+This is a privacy-first dApp built on the Midnight Network. It allows users to connect their Lace wallet, call a smart contract circuit that increments a public counter, and prove the increment value is valid — all without exposing the private input on-chain. The zero-knowledge proof is generated entirely in the browser.
 
 ## Privacy Model
 
-- What is PUBLIC (on-chain, visible to anyone): the counter value and the disclosed increment amount.
-- What is PRIVATE (private witness, never on-chain): the original private input supplied to the circuit.
-- What the user PROVES without revealing: that the increment was positive and that the transition is valid.
+- **What is PUBLIC:** The counter value on the blockchain, visible to anyone.
+- **What is PRIVATE:** The increment amount supplied by the user — never stored on-chain or shown in the UI.
+- **What the user PROVES without revealing:** That the increment is a positive integer and that the state transition is valid.
+
+## Privacy Claim
+
+An on-chain observer can see that the counter was incremented and by how much (via `disclose()`). However, the private witness input — the value the user originally supplied to the circuit — is never visible to observers. The user proves the increment is valid (positive, correct arithmetic) without revealing the raw input that generated it. The UI never displays private inputs, only the proof status and on-chain result.
 
 ## Tech Stack
 
-- Midnight network
-- Compact language
-- Node.js v22
-- Docker
+- Midnight Network (Preprod)
+- Compact language (smart contract)
+- Midnight.js SDK (contract interaction, ZK proofs)
+- `@midnight-ntwrk/dapp-connector-api` (Lace wallet integration)
+- React 19 + Vite
+- Lace wallet (browser extension)
 
 ## Prerequisites
 
+- Lace wallet installed (Chrome extension)
 - Node.js v22+
-- Docker Desktop or Docker Engine with Compose v2
-- Midnight Compact compiler support via the VS Code extension or local toolchain
 
-## Setup
+## Run Locally
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/LIGHT-25/Degree_Verification-_Portal.git
 cd Degree_Verification_platform
 npm install
-docker compose up -d --wait
-npm test
+npm run dev
 ```
 
-## Run Tests
+Open the local URL printed by Vite. Make sure Lace wallet is set to **Preprod** network.
 
-```bash
-npm test
-```
+## Demo Video
 
-## Initial Idea
-
-The **Degree Verification Platform** is a privacy-first smart contract built on the Midnight network. It allows universities to securely issue academic credentials while empowering students to prove their degree qualifications to employers without exposing sensitive, underlying private data on a public ledger. By using Midnight's zero-knowledge proofs, the platform ensures that the verification is cryptographically secure and tamper-proof.
-
-## Screenshots
-
-![Deployment Screenshot](./screenshot.png)
+[PLACEHOLDER -- I will add the link after recording]

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.cache/
+.midnight-wallet-state/
+midnight-level-db/
+.zkir/
+contracts/managed/
+*.lock
