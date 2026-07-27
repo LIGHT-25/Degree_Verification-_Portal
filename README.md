@@ -1,173 +1,136 @@
 # Degree Verification Portal
 
-This project is built on the Midnight Network.
+![CI](https://github.com/LIGHT-25/Degree_Verification-_Portal/actions/workflows/ci.yml/badge.svg)
 
 > A privacy-preserving dApp on Midnight Network that proves degree credentials without revealing private data on-chain.
 
----
+## Live Demo
 
-## Level 1 — Compact Contract on Preprod
+https://degree-verification-portal-one.vercel.app
 
-Level 1 delivered a working Compact contract, local tests, and a Preprod deployment with documented privacy behavior.
+## Contract Address
 
-### Contract Address
+| Network | Address |
+|---------|---------|
+| Preprod | `a746a03e40e6e4b36ec451548e355f2611657c2334e0e7594c3d14d4ef8da1de` |
 
-| Network    | Address |
-|------------|---------|
-| Undeployed | `3523aa3006329b8e763ba2cc655fb9a0e25833d2f11072c1d50146a830074d0b` |
-| Preview    | Pending deployment |
-| Preprod    | `a746a03e40e6e4b36ec451548e355f2611657c2334e0e7594c3d14d4ef8da1de` |
+Verify on Preprod explorers:
 
-(Contract address is MANDATORY. Do not leave this blank.)
+- https://preprod.midnightexplorer.com/
+- https://midnight-preprod.subscan.io/
+- https://explorer.1am.xyz/?network=preprod
 
-Verify Preprod on-chain:
+## What This Does
 
-- [preprod.midnightexplorer.com](https://preprod.midnightexplorer.com/)
-- [midnight-preprod.subscan.io](https://midnight-preprod.subscan.io/)
-- [explorer.1am.xyz (preprod)](https://explorer.1am.xyz/?network=preprod)
+Degree Verification Portal is a Midnight Compact counter circuit wired to a React + Lace frontend on Preprod. Users connect Lace, supply a **private** positive increment, generate a local zero-knowledge proof, and update a **public** on-chain counter — without displaying the private witness in the UI result.
 
-### Deployer Wallet (Preprod)
+## Privacy Model
 
-```text
-mn_addr_preprod18hl0hkw2sjdwuwztatxzp2mhwpre2w4hc9tlyx0l457k8dxd0fsqrda6jm
-```
+- **PUBLIC:** Counter value on the ledger (visible to anyone on-chain); disclosed increment applied via `disclose()`.
+- **PRIVATE:** The original private increment witness entered by the user (cleared from the form and never shown in the success panel).
+- **PROVED without revealing:** That the increment is strictly positive and that the ledger transition is valid.
 
-Fund this address from the [Preprod faucet](https://midnight-tmnight-preprod.nethermind.dev/) when deploying or calling from the CLI.
+## Privacy Claim
 
-### What This Does (Level 1)
+An on-chain observer can see that the public counter changed and by how much (the disclosed increment). They cannot see a separate private-witness field on the ledger, and the dApp never renders the private input in the result surface — only proof status / success and the transaction id.
 
-This contract keeps a public counter on the ledger and accepts a private witness input that must be strictly positive before the counter can be incremented. The circuit intentionally discloses the increment value only as part of the state transition, while the private witness remains part of the proof context rather than being exposed as public data.
+## Tech Stack
 
-### Privacy Model
-
-- **What is PUBLIC** (on-chain, visible to anyone): the counter value and the disclosed increment amount.
-- **What is PRIVATE** (private witness, never shown as a public DApp input): the original private input supplied to the circuit.
-- **What the user PROVES without revealing:** that the increment was positive and that the transition is valid.
-
-### Privacy Claim
-
-An on-chain observer can see that the counter was incremented and by how much (via `disclose()`). However, the private witness input — the value the user originally supplied to the circuit — is never displayed in the UI result surface. The user proves the increment is valid (positive, correct arithmetic) without revealing the raw private input as a public application field. The UI shows proof status and on-chain result only.
-
-### Initial Idea
-
-The **Degree Verification Platform** is a privacy-first smart contract built on the Midnight network. It allows universities to securely issue academic credentials while empowering students to prove their degree qualifications to employers without exposing sensitive, underlying private data on a public ledger. By using Midnight's zero-knowledge proofs, the platform ensures that the verification is cryptographically secure and tamper-proof.
-
-### Level 1 Screenshots
-##compilation screen shot:
-
-<img width="638" height="169" alt="Screenshot 2026-07-25 032956" src="https://github.com/user-attachments/assets/d479cd0e-df77-4ea7-9bf5-f40a33b87098" />
-
-##Deployment screenshot:
-
-<img width="1365" height="588" alt="Screenshot 2026-07-25 032653" src="https://github.com/user-attachments/assets/be1ed5ba-d26a-4d1b-9e2c-b624090c72ec" />
-
-### Level 1 Tech Stack
-
-- Midnight network
-- Compact language
-- Node.js v22
-- Docker
-
-### Level 1 Prerequisites
-
-- Node.js v22+
-- Docker Desktop or Docker Engine with Compose v2
-- Midnight Compact compiler support via the VS Code extension or local toolchain
-
-### Level 1 Setup
-
-```bash
-git clone https://github.com/LIGHT-25/Degree_Verification-_Portal.git
-cd Degree_Verification-_Portal
-npm install
-docker compose up -d --wait
-npm test
-```
-
-### Run Tests
-
-```bash
-npm test
-```
-
----
-
-## Level 2 — Frontend + Lace on Preprod
-
-Level 2 builds on Level 1: the same Preprod contract is wired to a React frontend, Lace wallet connect/disconnect works on Preprod, and `incrementCounter` is called from the browser.
-
-### Level 2 Submission Checklist
-
-| Requirement | Status |
-|-------------|--------|
-| Public GitHub repository with README | ✅ This repo |
-| Live demo (Vercel) | ✅ [degree-verification-portal-one.vercel.app](https://degree-verification-portal-one.vercel.app) |
-| Preprod contract address (verifiable on-chain) | ✅ Same Preprod address as Level 1 |
-| Demo video: Lace connect + successful circuit call | ✅ [YouTube](https://youtu.be/G2w07YhLLnc) |
-| README documents the privacy claim | ✅ See Privacy Claim above |
-| Minimum 8 meaningful commits | ✅ |
-| Lace connect / disconnect | ✅ |
-| Circuit called from frontend | ✅ |
-| Observable privacy behavior | ✅ Private witness + ZK proof; UI does not display private input |
-
-### Live Demo
-
-**https://degree-verification-portal-one.vercel.app**
-
-### Demo Video
-
-Wallet connect / disconnect and a successful `incrementCounter` circuit call on Preprod:
-
-**Watch on YouTube:** https://youtu.be/G2w07YhLLnc
-
-Also in the repo: [circuit_calling_proof.mp4](./circuit_calling_proof.mp4)
-
-### Try the Live Demo
-
-1. Install the [Lace](https://chromewebstore.google.com/detail/lace/gafhhkghbfjjkeiendhlofajokpaflmk) browser extension.
-2. Set Lace network to **Preprod**.
-3. Set Lace proof server to `http://localhost:6300`.
-4. From this repo run: `npm run proof-server:start` (Docker required).
-5. Fund Lace with tNIGHT from the [Preprod faucet](https://midnight-tmnight-preprod.nethermind.dev/), then generate tDUST in Lace.
-6. Open the live demo → **Connect** → call the circuit.
-
-### What Level 2 Adds
-
-- Lace wallet **connect / disconnect** via `@midnight-ntwrk/dapp-connector-api`
-- Circuit call from the React UI (`incrementCounter`) with result handling
-- Local private state management in the browser
-- Frontend deployed to Vercel, still targeting the Level 1 Preprod contract
-
-### Level 2 Tech Stack (additions)
-
+- Midnight Network (Preprod)
+- Compact smart contracts + `@midnight-ntwrk/compact-runtime`
 - Midnight.js SDK (`midnight-js-contracts`, ZK config, indexer provider)
 - `@midnight-ntwrk/dapp-connector-api` (Lace)
 - React 19 + Vite
+- Vitest
+- GitHub Actions CI
+- Docker (local proof server)
 - Vercel (frontend hosting)
 
-### Run the Frontend Locally
+## Prerequisites
+
+- Node.js v22+
+- npm
+- Docker Desktop (for local proof server used with Lace)
+- Lace browser extension set to **Preprod**
+- Midnight Compact toolchain (`compact`) for compiling contracts
+
+## Setup & Run Locally
 
 ```bash
 git clone https://github.com/LIGHT-25/Degree_Verification-_Portal.git
 cd Degree_Verification-_Portal
 npm install
+npm run compile
 npm run proof-server:start
 npm run dev
 ```
 
-Open the Vite URL. Lace must be on **Preprod** with proof server `http://localhost:6300`.
+Then open the Vite URL, connect Lace (Preprod, proof server `http://localhost:6300`), fund with faucet tokens, and call the circuit.
 
-### Scripts
+## Run Tests
+
+```bash
+npm test
+```
+
+## CI/CD
+
+Workflow: [`.github/workflows/ci.yml`](./.github/workflows/ci.yml) (badge at the top of this README).
+
+### CI (Continuous Integration)
+
+Runs on every **push to `main`** and every **pull request**:
+
+1. Checkout code
+2. Install Node.js v22
+3. Install / update Compact toolchain
+4. `npm install`
+5. `compact compile` for `contracts/counter.compact`
+6. Run test suite (`npm test`)
+7. Production build check (`npm run build`)
+
+### CD (Continuous Deployment)
+
+Runs only on **push to `main`**, after CI succeeds:
+
+1. Pull Vercel production settings
+2. Build with Vercel
+3. Deploy prebuilt output to **Vercel production** (live demo)
+
+Required GitHub repository secrets for CD:
+
+| Secret | Where to get it |
+|--------|-----------------|
+| `VERCEL_TOKEN` | Vercel → Account Settings → Tokens |
+| `VERCEL_ORG_ID` | `.vercel/project.json` after `vercel link` (or Vercel project settings) |
+| `VERCEL_PROJECT_ID` | Same as above |
+
+```bash
+# One-time local link (optional helper)
+npx vercel link
+# Then copy org/project ids from .vercel/project.json into GitHub Secrets
+```
+
+## Product Proposal
+
+See [PROPOSAL.md](./PROPOSAL.md)
+
+## Demo Video (Level 2)
+
+Wallet connect / disconnect and a successful `incrementCounter` circuit call on Preprod:
+
+https://youtu.be/G2w07YhLLnc
+
+## Scripts
 
 | Script | Purpose |
 |--------|---------|
-| `npm test` | Level 1 contract tests |
-| `npm run deploy` | Deploy / interact via CLI |
-| `npm run dev` | Local UI (Level 2) |
-| `npm run build:ui` | Production UI build (Vercel) |
+| `npm test` | Contract unit tests (circuit / state / privacy) |
+| `npm run compile` | Compact compile + ensure root `managed/` |
+| `npm run build` | Production UI build |
+| `npm run dev` | Local UI |
 | `npm run proof-server:start` | Local Docker proof server on `:6300` |
-
----
+| `npm run deploy` | Deploy / interact via CLI |
 
 ## Repository
 
