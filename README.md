@@ -95,13 +95,13 @@ Runs on every **push to `main`** and every **pull request**:
 
 Runs on every **push to `main`**, after CI succeeds:
 
-**CD (GitHub Pages)** — always runs, no secrets required:
+**CD (GitHub Pages)** — always runs after CI on `main`:
 
 1. Build production UI with GitHub Pages base path
-2. Upload `dist/` artifact
-3. Deploy to **GitHub Pages** → https://light-25.github.io/Degree_Verification-_Portal/
+2. Push `dist/` to the `gh-pages` branch
+3. Site URL (after one-time Pages enable): https://light-25.github.io/Degree_Verification-_Portal/
 
-> One-time repo setting: **Settings → Pages → Build and deployment → Source: GitHub Actions**
+> One-time repo setting: **Settings → Pages → Source: Deploy from branch → `gh-pages` / root**
 
 **CD (Vercel)** — optional, runs when these secrets are set:
 
