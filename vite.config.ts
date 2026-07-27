@@ -5,6 +5,8 @@ import topLevelAwait from 'vite-plugin-top-level-await';
 import path from 'path';
 
 export default defineConfig({
+  // GitHub Pages serves from a subpath; Vercel/local use root "/".
+  base: process.env.VITE_BASE_PATH || '/',
   plugins: [react(), wasm(), topLevelAwait()],
   build: {
     target: 'esnext',

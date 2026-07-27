@@ -6,7 +6,8 @@
 
 ## Live Demo
 
-https://degree-verification-portal-one.vercel.app
+- **Vercel:** https://degree-verification-portal-one.vercel.app
+- **GitHub Pages (auto-deployed by CD):** https://light-25.github.io/Degree_Verification-_Portal/
 
 ## Contract Address
 
@@ -42,9 +43,10 @@ An on-chain observer can see that the public counter changed and by how much (th
 - `@midnight-ntwrk/dapp-connector-api` (Lace)
 - React 19 + Vite
 - Vitest
-- GitHub Actions CI
+- GitHub Actions CI/CD
+- GitHub Pages (CD deploy target)
 - Docker (local proof server)
-- Vercel (frontend hosting)
+- Vercel (optional additional frontend hosting)
 
 ## Prerequisites
 
@@ -91,24 +93,26 @@ Runs on every **push to `main`** and every **pull request**:
 
 ### CD (Continuous Deployment)
 
-Runs only on **push to `main`**, after CI succeeds:
+Runs on every **push to `main`**, after CI succeeds:
 
-1. Pull Vercel production settings
-2. Build with Vercel
-3. Deploy prebuilt output to **Vercel production** (live demo)
+**CD (GitHub Pages)** — always runs, no secrets required:
 
-Required GitHub repository secrets for CD:
+1. Build production UI with GitHub Pages base path
+2. Upload `dist/` artifact
+3. Deploy to **GitHub Pages** → https://light-25.github.io/Degree_Verification-_Portal/
+
+> One-time repo setting: **Settings → Pages → Build and deployment → Source: GitHub Actions**
+
+**CD (Vercel)** — optional, runs when these secrets are set:
 
 | Secret | Where to get it |
 |--------|-----------------|
 | `VERCEL_TOKEN` | Vercel → Account Settings → Tokens |
-| `VERCEL_ORG_ID` | `.vercel/project.json` after `vercel link` (or Vercel project settings) |
+| `VERCEL_ORG_ID` | `.vercel/project.json` after `vercel link` |
 | `VERCEL_PROJECT_ID` | Same as above |
 
 ```bash
-# One-time local link (optional helper)
-npx vercel link
-# Then copy org/project ids from .vercel/project.json into GitHub Secrets
+powershell -File scripts/setup-vercel-secrets.ps1
 ```
 
 ## Product Proposal
