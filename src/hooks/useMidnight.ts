@@ -2,7 +2,6 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import type { InitialAPI, ConnectedAPI } from '@midnight-ntwrk/dapp-connector-api';
 
 const NETWORK_ID = 'preprod' as const;
-const MOCK_MODE = new URLSearchParams(window.location.search).has('mock');
 
 interface MidnightState {
   walletState: 'detecting' | 'no-wallet' | 'ready' | 'connecting' | 'connected' | 'error';
@@ -46,10 +45,18 @@ function extractError(e: any): string {
   const full = msg + ' | ' + cause;
   if (full.includes('reject')) return 'User rejected the connection. Try again and approve in Lace.';
   if (full.includes('network') || full.includes('Network')) return 'Network mismatch. Set Lace to Preprod network.';
-  if (full.includes('fetch')) return 'Network error. Check your internet connection.';
-  if (full.includes('Insufficient Funds') || full.includes('dust')) return 'Insufficient tDUST. Please get testnet tokens from the Midnight Faucet to pay for transaction fees.';
+  if (full.includes('proof server') || full.includes('ProofServer') || full.includes('ECONNREFUSED') || full.includes(':6300')) {
+    return 'Proof server unreachable. Run npm run proof-server:start and set Lace proof server to http://localhost:6300.';
+  }
+  if (full.includes('fetch')) return 'Network error. Check your internet connection and indexer status.';
+  if (full.includes('Insufficient Funds') || full.includes('dust')) {
+    return 'Insufficient tDUST. Get Preprod faucet tokens, then generate tDUST in Lace.';
+  }
+  if (full.includes('greater than zero') || full.includes('Increment amount')) {
+    return 'Private increment must be greater than zero.';
+  }
   if (full.length > 10) return full.slice(0, 300);
-  return 'Error occurred. Open browser console (F12) for details.';
+  return 'Something went wrong. Open the debug log below or browser console (F12) for details.';
 }
 
 export function useMidnight() {
@@ -275,7 +282,8 @@ export function useMidnight() {
 
         setCircuitState({
           isCalling: false,
-          result: 'Counter incremented successfully!',
+          result:
+            'Counter incremented successfully. Private input was not included in this result.',
           txId: transaction.public.txId,
           error: null,
         });
@@ -287,7 +295,7 @@ export function useMidnight() {
           isCalling: false,
           result: null,
           txId: null,
-          error: errMsg,
+          error: 'Circuit call failed: ' + errMsg,
         });
       }
     },
