@@ -22,6 +22,11 @@ contracts/managed/contract/
 contracts/managed/keys/
 contracts/managed/zkir/
 
+# Root managed/ is a post-compile mirror of contracts/managed/counter
+# (created by scripts/ensure-managed-root.mjs). Keep the folder via .gitkeep.
+/managed/**
+!/managed/.gitkeep
+
 # Deployment info
 deployment.json
 

@@ -6,9 +6,9 @@
   "author": "LIGHT-25",
   "license": "MIT",
   "scripts": {
-    "compile": "node -e \"const fs=require('fs'); const path=require('path'); const compiled=path.join(process.cwd(),'contracts/managed/counter/contract/index.js'); if (!fs.existsSync(compiled)) { console.error('Compiled counter artifacts not found.'); process.exit(1); } console.log('Using existing compiled artifacts at contracts/managed/counter');\"",
-    "build": "npx tsc --noEmit || true",
-    "build:ui": "node scripts/sync-zk-artifacts.mjs && vite build",
+    "compile": "compact compile contracts/counter.compact contracts/managed/counter && node scripts/ensure-managed-root.mjs",
+    "build": "node scripts/sync-zk-artifacts.mjs && vite build",
+    "build:ui": "npm run build",
     "dev": "node scripts/sync-zk-artifacts.mjs && vite",
     "preview": "vite preview",
     "setup": "npx tsx src/setup.ts",
