@@ -34,6 +34,12 @@ body {
   gap: 16px;
 }
 
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .header h1 {
   font-size: 1.5rem;
   font-weight: 600;
@@ -275,6 +281,21 @@ body {
   margin-bottom: 16px;
 }
 
+.privacy-banner {
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: var(--text);
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+
+.privacy-banner strong {
+  color: var(--success);
+}
+
 .private-label {
   background: rgba(124, 92, 255, 0.1);
   border: 1px solid rgba(124, 92, 255, 0.3);
@@ -286,7 +307,25 @@ body {
   margin-bottom: 16px;
 }
 
+.input-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
 .input-group { margin-bottom: 16px; }
+
+.privacy-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.hint.left {
+  text-align: left;
+  margin-top: 8px;
+}
 
 .input {
   width: 100%;
@@ -400,4 +439,56 @@ body {
 .footer a {
   color: var(--accent);
   text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 16px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header h1 {
+    font-size: 1.25rem;
+  }
+
+  .main {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .wallet-card,
+  .circuit-card,
+  .info-card {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .wallet-connected,
+  .wallet-none {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .wallet-address {
+    font-size: 0.8rem;
+  }
+
+  .btn,
+  .btn-connect,
+  .btn-primary,
+  .btn-install {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer {
+    padding: 16px;
+  }
+
+  .status-bar {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 }
